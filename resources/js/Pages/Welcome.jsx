@@ -13,6 +13,9 @@ import { ChevronRight, PinIcon, CheckIcon, MapPinIcon } from "lucide-react";
 import GoogleMapReact from "google-map-react";
 import Header from "@/Components/Header";
 import HomeNuevo from "@/Components/HomeNuevo";
+import BienVenido from "@/Components/BienVenida";
+import MenuDelegaciones from "@/Components/MenuDelegaciones";
+import Noticias from "@/Components/Noticias";
 
 export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
     const [videoVisible, setVideoVisible] = useState(true);
@@ -193,6 +196,9 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
         <>
             <Head title="Inicio" />
             <HomeNuevo></HomeNuevo>
+            <BienVenido/>
+            <MenuDelegaciones/>
+            <Noticias/>
             <Footer></Footer>
         </>
     );

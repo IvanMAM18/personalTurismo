@@ -12,6 +12,7 @@ import { Dialog } from "primereact/dialog";
 import { ChevronRight, PinIcon, CheckIcon, MapPinIcon } from "lucide-react";
 import GoogleMapReact from "google-map-react";
 import Header from "@/Components/Header";
+import BienVenido from "@/Components/BienVenida";
 
 const HomeNuevo = () => {
 
@@ -27,8 +28,8 @@ const HomeNuevo = () => {
             <div className="absolute w-full h-full flex flex-col justify-between items-center bg-black bg-opacity-50">
                 <Header/>
                 <div className="flex flex-col mb-16 justify-end items-center flex-grow text-center">
-                    <div className="text-white text-6xl font-bold">¡Bienvenido a La Paz!</div>
-                    <div className="text-white text-xl mt-2">Un destino que despierta tus sentidos</div>
+                    <div className="text-white text-[10vh] font-bold">¡Bienvenido a La Paz!</div>
+                    <div className="text-white text-[3vh] mt-2">Un destino que despierta tus sentidos</div>
                 </div>
             </div>
         </div>
