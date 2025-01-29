@@ -1,5 +1,6 @@
 import { IconSearch } from "@tabler/icons-react";
 import Dropdown from "./Dropdown";
+import ButtonMenu from "./ButtonMenu";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
@@ -43,15 +44,6 @@ const NavigationMenuDemo = ({ delegaciones }) => {
                     </NavigationMenu.Content>
                 </NavigationMenu.Item>
 
-                <NavigationMenu.Item>
-                    <NavigationMenu.Link asChild>
-                        <Link className="hover:bg-slate-800/50 focus:shadow-white block select-none rounded-[4px] px-3 py-2 font-extrabold text-lg leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
-                        href="/">
-                        Idioma
-                        </Link>
-                    </NavigationMenu.Link>
-                </NavigationMenu.Item>
-
                 <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease]">
                     <div className="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white" />
                 </NavigationMenu.Indicator>
@@ -86,19 +78,27 @@ const ListItem = React.forwardRef(
     )
 );
 
+
 export default function Menu(props) {
     return (
         <div className="w-full flex justify-center sm:justify-between text-white py-5 sm:px-12 px-5 items-center z-10 relative">
-            <div>
+            <div className="flex">
                 <Link href="/">
-                    <img src="/images/logof.png" className="w-[90px]" />
+                    <img src="/images/logof.png" className="w-[8vh]" />
                 </Link>
+                <img src="/images/logo2.png" className="w-[8vh]" />
             </div>
             <div className="flex-1">
-                <NavigationMenuDemo {...props}></NavigationMenuDemo>
+                 {/* <NavigationMenuDemo {...props}></NavigationMenuDemo>  */}
             </div>
-            <div className="flex gap-4 items-end justify-end w-[100px] ">
-                <img src="/images/logob.png" className="w-[90px]" />
+            <div className="flex items-end justify-end w-[100px] ">
+                {/* <div className=" border border-white rounded-lg p-1 cursor-pointer hover:border-4 hover:border-amber-700 text-white hover:text-amber-700">
+                    <svg class="h-8 w-8 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </div> */}
+                <ButtonMenu delegacion={props}></ButtonMenu>
+                
             </div>
         </div>
     );
