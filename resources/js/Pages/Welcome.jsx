@@ -3,6 +3,7 @@ import TopBar from "@/Components/TopBar";
 import Menu from "@/Components/Menu";
 import Footer from "@/Components/Footer";
 import ButtonMenu from "@/Components/ButtonMenu";
+import BannerDelegaciones from "@/Components/BannerDelegaciones";
 import Suscribir from "@/Components/Suscribir";
 import Public from "@/Layouts/PublicLayout";
 import { useState } from "react";
@@ -217,6 +218,33 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
         };
     };
 
+    //const [currentIndex, setCurrentIndex] = useState(0); // Índice para las imágenes pequeñas
+    const [selectedImage, setSelectedImage] = useState(null); // Imagen seleccionada para mostrar en grande
+
+    // Función para manejar el botón "Siguiente"
+    const handleNext = () => {
+      if (currentIndex < delegaciones.length - 5) {
+        setCurrentIndex(currentIndex + 1);
+      }
+    };
+  
+    // Función para manejar el botón "Atrás"
+    const handlePrev = () => {
+      if (currentIndex > 0) {
+        setCurrentIndex(currentIndex - 1);
+      }
+    };
+  
+    // Función para seleccionar una imagen
+    const handleImageClick = (imagePath) => {
+      setSelectedImage(imagePath); // Establece la imagen seleccionada
+    };
+  
+    // Función para cerrar la vista de imagen grande
+    const handleClose = () => {
+      setSelectedImage(null); // Restablece el estado para volver al mapeo normal
+    };
+
     return (
         <>
             <Head title="Inicio" />
@@ -240,7 +268,12 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                 </div>
             </Dialog> */}
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-center bg-white  selection:bg-red-500 selection:text-white">
-                <div className="w-full mx-auto bg-[url('/images/3.png')]">
+                <img
+                    src="/images/3.png"
+                    alt="Imagen fija"
+                    className="fixed top-0 left-0 w-full h-auto object-cover z-0"
+                />
+                <div className="w-full mx-auto relative">
                     <div className={`relative max-w-full ${isSmallScreen ? ' h-[55.8vw] ' : ' h-[40vw] '}  mx-auto bg-[url('/images/principal.jpg')] bg-cover bg-center`}>
                         <TopBar
                             temperatura={temperatura}
@@ -275,7 +308,9 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             Sin video
                         </video> 
                     </div>
-                    <div className="flex mx-auto bg-cover bg-center justify-center items-center xl:py-10">
+                    
+                    {/* BIENVENIDA */}
+                    <div className="flex mx-auto bg-center justify-center items-center xl:py-10">
                         <div className="w-9/12 flex flex-col xl:flex-row justify-center items-center text-black">
                             <div className="xl:m-0 my-4">
                                 <img
@@ -397,11 +432,11 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         </div>
                     </div>
 
-                    {/* {Destinos} */}
+                    {/* {vision} */}
                     <div className="flex mx-auto justify-center items-center my-1">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative">
-                                <h1 className="text-2xl font-bold before:absolute before:-bottom-2 before:h-[3px] before:w-[120px] before:border-b before:bg-[#9E214D] before:ml-2">
+                            <div className="relative w-full">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[16.5vh] before:border-b before:bg-[#9E214D]">
                                     Visión 2040
                                 </h1>
                             </div>
@@ -423,15 +458,16 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         </div>
                     </div>
 
+
                     {/* {Destinos} */}
-                    <div className="flex mx-auto justify-center items-center my-4">
+                    <BannerDelegaciones delegacion={delegaciones}></BannerDelegaciones>
+                    {/* <div className="flex mx-auto justify-center items-center my-4">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative">
-                                <h1 className="text-2xl font-bold before:absolute before:-bottom-2 before:h-[3px] before:w-[130px] before:border-b before:bg-[#9E214D] before:ml-2">
+                            <div className="relative w-full flex">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
                                     Delegaciones
                                 </h1>
                             </div>
-
                             <div className="grid grid-cols-1 xl:grid-cols-4 4xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-2 gap-6 lg:gap-8 my-5">
                                 {delegaciones.map((item) => (
                                     <Link
@@ -442,24 +478,24 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                         )}
                                         className="scale-100 bg-white rounded-lg shadow-[10px_10px_10px_5px_rgba(0,0,0,0.25)] flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-amber-700"
                                     >
-                                        <div className="flex w-full flex-col">
-                                            <div className="">
+                                        <div className="flex w-full flex-col ">
+                                            <div className=" shadow shadow-[#ECC6A1] rounded-lg">
                                                 <img
                                                     src={item.cover_path}
                                                     className="w-full rounded-t-lg h-[200px]"
                                                 />
                                             </div>
-                                            <div className="p-2">
-                                                <h2 className="text-xl font-semibold text-gray-900">
+                                            <div className="p-2 rounded-b-lg">
+                                                <h2 className="text-xl font-semibold text-gray-800">
                                                     {item.nombre}
                                                 </h2>
-                                                <h3 className="text-gray-900 text-sm">
+                                                <h3 className="text-gray-800 text-sm">
                                                     {item.leyenda}
                                                 </h3>
                                                 <div className="my-5">
                                                     <span
                                                         role="button"
-                                                        className="rounded-full py-2 px-4 sm:px-1 sm:py-1 border-2 border-gray-500 font-bold text-gray-900 text-xs"
+                                                        className="rounded-full py-2 px-4 sm:px-1 sm:py-1 border-2 border-gray-500 font-bold text-gray-700 text-xs"
                                                     >
                                                         CONOCER MÁS{" "}
                                                         <ChevronRight className="inline" size={13}></ChevronRight>
@@ -471,7 +507,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* <div className="flex mx-auto justify-center items-center my-20">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
@@ -487,45 +523,13 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
 
                        
                     </div> */}
-                    <div className="flex mx-auto justify-center items-center my-10">
-                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative">
-                                <h1 className="text-2xl font-bold before:absolute before:-bottom-2 before:h-[3px] before:w-[95px] before:border-b before:bg-[#9E214D] before:ml-2">
-                                    Ubicación
-                                </h1>
-                            </div>
-                            <div
-                                style={{
-                                    height: "40vh",
-                                    width: "100%",
-                                }}
-                            >
-                                <GoogleMapReact
-                                    bootstrapURLKeys={{
-                                        key: "AIzaSyDDsXWAnmhPpTP9St_pt27H16RD771s7dI",
-                                    }}
-                                    defaultCenter={{
-                                        lat: 24.1481589,
-                                        lng: -110.3181937,
-                                    }}
-                                    defaultZoom={13}
-                                    options={createMapOptions}
-                                >
-                                    <Marker
-                                        lat={pos.lat}
-                                        lng={pos.lng}
-                                        text="La Paz"
-                                    />
-                                </GoogleMapReact>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     {/* {eventos} */}
                     <div className="flex mx-auto justify-center items-center my-10">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative">
-                                <h1 className="text-2xl font-bold before:absolute before:-bottom-2 before:h-[3px] before:w-[75px] before:border-b before:bg-[#9E214D] before:ml-2">
+                            <div className="relative w-full">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:border-b before:bg-[#9E214D]">
                                     Eventos
                                 </h1>
                             </div>
@@ -559,6 +563,8 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             />
                         </div>
                     </div>
+                    
+                    
 
                     {/* {otro} */}
                     {/* <div className="flex mx-auto justify-center items-center bg-red-200">
@@ -574,7 +580,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             />
                         </div>
                     </div> */}
-                    <div className={`relative w-full ${isSmallScreen ? 'h-[40vw]' : 'h-[40vw] '} mt-8 mb-10`}>
+                    <div className={`relative w-full ${isSmallScreen ? 'h-[40vw]' : 'h-[40vw] '} mt-8 mb-[5vh]`}>
                         <div className="relative overflow-hidden rounded-lg h-auto min-h-full max-h-full w-9/12 mx-auto">
                             {images.map((image, index) => (
                                 <div
@@ -589,7 +595,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         {/* Botón para ir al slide anterior nuevo */}
                         <button
                             onClick={prevSlide}
-                            className="absolute top-1/2 left-0 z-30 transform -translate-y-1/2 mx-[3vw]"
+                            className="absolute top-1/2 left-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
                         >
                             <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded-full shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
                                 <svg className="w-[2vw] h-[2vw]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -602,7 +608,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         {/* Botón para ir al slide siguiente */}
                         <button
                             onClick={nextSlide}
-                            className="absolute top-1/2 right-0 z-30 transform -translate-y-1/2 mx-[3vw]"
+                            className="absolute top-1/2 right-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
                         >
                             <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded-full shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
                                 <svg className="w-[2vw] h-[2vw]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -613,7 +619,40 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         </button>
                     </div>
 
-
+                    {/* Ubicacion */}
+                    <div className="flex mx-auto justify-center items-center mb-[5vh]">
+                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-full">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:border-b before:bg-[#9E214D]">
+                                    Ubicación
+                                </h1>
+                            </div>
+                            <div
+                                style={{
+                                    height: "35vh",
+                                    width: "100%",
+                                }}
+                            >
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{
+                                        key: "AIzaSyDDsXWAnmhPpTP9St_pt27H16RD771s7dI",
+                                    }}
+                                    defaultCenter={{
+                                        lat: 24.1481589,
+                                        lng: -110.3181937,
+                                    }}
+                                    defaultZoom={13}
+                                    options={createMapOptions}
+                                >
+                                    <Marker
+                                        lat={pos.lat}
+                                        lng={pos.lng}
+                                        text="La Paz"
+                                    />
+                                </GoogleMapReact>
+                            </div>
+                        </div>
+                    </div>
 
                     <Footer></Footer> 
                 </div>

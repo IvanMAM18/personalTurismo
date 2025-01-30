@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAtractivoRequest;
 use App\Http\Requests\StoreDelegacionRequest;
+use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateAtractivoRequest;
 use App\Http\Requests\UpdateDelegacionRequest;
 use App\Http\Resources\AtractivoCollection;
