@@ -4,6 +4,7 @@ import Menu from "@/Components/Menu";
 import Footer from "@/Components/Footer";
 import ButtonMenu from "@/Components/ButtonMenu";
 import BannerDelegaciones from "@/Components/BannerDelegaciones";
+import CarruselEventos from "@/Components/CarruselEventos";
 import Suscribir from "@/Components/Suscribir";
 import Public from "@/Layouts/PublicLayout";
 import { useState } from "react";
@@ -187,7 +188,8 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
 
     const eventosTemplate = (evento) => {
         return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 flex items-center justify-center align-middle h-full">
+            <div 
+            className="border-1 surface-border border-round m-2 text-center py-5 px-3 flex items-center justify-center align-middle ">
                 <div className="mb-3">
                     <Image
                         src={evento.imagen}
@@ -461,7 +463,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
 
                     {/* {Destinos} */}
                     <BannerDelegaciones delegacion={delegaciones}></BannerDelegaciones>
-                    {/* <div className="flex mx-auto justify-center items-center my-4">
+                     {/* <div className="flex mx-auto justify-center items-center my-4">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full flex">
                                 <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
@@ -507,7 +509,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                 ))}
                             </div>
                         </div>
-                    </div> */}
+                    </div>  */}
 
                     {/* <div className="flex mx-auto justify-center items-center my-20">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
@@ -533,20 +535,40 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                     Eventos
                                 </h1>
                             </div>
+                            {/* carrussel */}
+                            {/* <CarruselEventos eventos={eventos.data}></CarruselEventos> */}
+                            {/* Mapeo de imágenes */}
+                            {/* <div className="flex justify-center items-center gap-4">
+                                {eventos.data.map((evento, index) => (
+                                    <div
+                                        key={index}
+                                        className={`border border-gray-300 rounded-lg text-center py-5 px-3 flex items-center justify-center h-full transition-all duration-300 ${
+                                            index === 1 ? "scale-110 z-10" : "scale-90 opacity-70"
+                                        }`}
+                                    >
+                                        <div className="mb-3">
+                                            <img
+                                                src={evento.imagen}
+                                                alt={evento.alt}
+                                                className="w-full max-w-xs object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div> */}
+                            
                             <Carousel
                                 value={eventos.data || []}
-                                numVisible={4}
+                                numVisible={1}
                                 numScroll={1}
                                 itemTemplate={eventosTemplate}
-                                responsiveOptions={responsiveOptions}
-                                pt={{
-                                    indicatorButton: {
-                                        className: "!rounded-md !w-[0.5rem]",
-                                    },
-                                }}
+                                circular
+                                showIndicators={false}
+                                autoplayInterval={10000}
                             />
                         </div>
                     </div>
+                    
                     {/* <Suscribir></Suscribir> */}
 
                     {/* {banners} */}
@@ -580,6 +602,8 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             />
                         </div>
                     </div> */}
+
+                    {/* BIENVENIDA */}
                     <div className={`relative w-full ${isSmallScreen ? 'h-[40vw]' : 'h-[40vw] '} mt-8 mb-[5vh]`}>
                         <div className="relative overflow-hidden rounded-lg h-auto min-h-full max-h-full w-9/12 mx-auto">
                             {images.map((image, index) => (

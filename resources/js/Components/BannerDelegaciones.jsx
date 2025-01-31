@@ -1,4 +1,6 @@
 import { Head, Link } from "@inertiajs/react";
+import { ChevronRight, PinIcon, CheckIcon, MapPinIcon } from "lucide-react";
+import InfiniteCarousel from "./InfinteCarousel";
 import React, { useState, useEffect } from 'react';
 
 export default function BannerDelegaciones ({delegacion}){
@@ -49,7 +51,7 @@ export default function BannerDelegaciones ({delegacion}){
 
     return (
         <>
-            <div className="flex mx-auto justify-center items-center my-14">
+            <div className="flex mx-auto justify-center items-center my-[3vw]">
                 <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                     {/* Título */}
                     <div className="relative w-full flex">
@@ -63,7 +65,7 @@ export default function BannerDelegaciones ({delegacion}){
                                     <button
                                         onClick={handlePrev}
                                         disabled={currentIndex === 0}
-                                        className={`bg-gray-500 w-[5vh] h-[5vh] mr-[2vw] shadow ${
+                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] mr-[2vw] shadow text-gray-700 ${
                                         currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
                                         }`}
                                     >
@@ -72,7 +74,7 @@ export default function BannerDelegaciones ({delegacion}){
                                     <button
                                         onClick={handleNext}
                                         disabled={currentIndex >= delegacion.length - 5}
-                                        className={`bg-gray-500 w-[5vh] h-[5vh] shadow ${
+                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] shadow text-gray-700 ${
                                         currentIndex >= delegacion.length - 5
                                             ? "opacity-50 cursor-not-allowed"
                                             : "hover:bg-gray-300"
@@ -85,7 +87,7 @@ export default function BannerDelegaciones ({delegacion}){
                                     // Botón para cerrar
                                     <button
                                     onClick={handleClose}
-                                    className="bg-red-500 text-white w-[5vh] h-[5vh] shadow hover:bg-red-600"
+                                    className="bg-[#9E214D] opacity-70 text-white w-[4.8vh] h-[4.8vh] shadow hover:opacity-100 transition-all duration-300"
                                     >
                                     X
                                     </button>
@@ -95,45 +97,61 @@ export default function BannerDelegaciones ({delegacion}){
 
                     {/* Imagen seleccionada en grande */}
                     {selectedImage && (
-                        <div className="relative w-full h-[25vw] flex justify-center items-center">
+                        <div className="relative w-full h-[28vw] flex justify-center items-center transition-all duration-300 mt-[2vw]">
                             <img
-                                src={selectedImage}
+                                src={selectedImage.cover_path}
                                 alt="Imagen seleccionada"
                                 className="w-[38vw] h-full object-coverrounded mr-auto rounded"
                             />
                                 {/* Texto encima de la imagen */}
                             <div className="w-[38vw] h-full ml-4 flex flex-col justify-center items-center bg-black rounded bg-opacity-50 gap-4">
-                                <h2 className="text-white text-[4vh] font-bold">La Paz</h2>
-                                <h1 className="text-white text-[2.5vh]">Vive un paraíso entre el desierto y el mar</h1>
-                                <button className="p-4 bg-white rounded hover:bg-gray-200">
-                                    CONOCER MÁS
-                                </button>
+                                <h2 className="text-white text-[2.2vw] font-bold">{selectedImage.nombre}</h2>
+                                <h1 className="text-white text-[1.8vw]">{selectedImage.leyenda}</h1>
+                                <Link href={route(
+                                            "delegacion.show",
+                                            selectedImage.slug
+                                        )}>
+                                    <button 
+                                        
+                                        className="p-[0.6vw] text-[0.9vw] bg-white rounded opacity-70 hover:opacity-100">
+                                        CONOCER MÁS
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     )}
 
                     {/* Mapeo de imágenes pequeñas */}
-                    {!selectedImage && (
-                        <div className="top-0 right-0 w-full h-[25vw] flex flex-row items-center justify-center gap-2">
-                            {delegacion.slice(currentIndex, currentIndex + 5).map((item, index) => (
-                                <Link
-                                    key={item.slug}
-                                    href={route("delegacion.show", item.slug)}
-                                    className="w-[14.7vw] h-full rounded overflow-hidden shadow shadow-[#ECC6A1]"
-                                    onClick={(e) => {
-                                        e.preventDefault(); // Evita la navegación al hacer clic
-                                        handleImageClick(item.cover_path); // Cambia la imagen principal
-                                    }}
-                                >
-                                    <img
-                                        src={item.cover_path}
-                                        alt={`Imagen ${index + 1}`}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </Link>
-                            ))}
-                        </div>
-                    )}
+                        {!selectedImage && (
+                            <div className="top-0 right-0 w-full h-[28vw] flex flex-row items-center justify-center gap-2  mt-[2vw]">
+                                {delegacion.slice(currentIndex, currentIndex + 5).map((item, index) => (
+                                    <div
+                                        key={item.slug}
+                                        //href={route("delegacion.show", item.slug)}
+                                        className="relative w-[14.7vw] h-full rounded overflow-hidden shadow shadow-[#ECC6A1] group transition-all duration-300 cursor-pointer"
+                                        onClick={(e) => {
+                                            e.preventDefault(); // Evita la navegación al hacer clic
+                                            handleImageClick(item); // Cambia la imagen principal
+                                        }}
+                                    >
+                                        {/* Imagen */}
+                                        <img
+                                            src={item.cover_path}
+                                            alt={`Imagen ${index + 1}`}
+                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 opacity-100"
+                                        />
+
+                                        {/* Texto encima de la imagen */}
+                                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-opacity duration-300">
+                                            <p className="text-white text-[1.4vw] font-bold text-center">{item.nombre || `Imagen ${index + 1}`}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+
+                    <InfiniteCarousel items={delegacion}></InfiniteCarousel> 
                 </div>
             </div>
         </>

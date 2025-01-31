@@ -60,7 +60,7 @@ export default function ButtonMenu  ({delegacion}){
                 >
                     <div className='w-[40vh] p-2 rounded-lg ml-auto bg-[#ECC6A1]  border border-white'>
                             
-                        <div className="text-[3vh] text-center font-bold text-gray-800">Delegeaciones</div>
+                        <div className="text-[3vh] text-center font-bold text-[#9B234C]">Delegeaciones</div>
                         
                         <ul className='mt-2 mx-2'>
                             <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
