@@ -3,7 +3,9 @@ import TopBar from "@/Components/TopBar";
 import Menu from "@/Components/Menu";
 import Footer from "@/Components/Footer";
 import ButtonMenu from "@/Components/ButtonMenu";
+import BannerEventos from "@/Components/BannerEventos";
 import BannerDelegaciones from "@/Components/BannerDelegaciones";
+import BannerBienvenida from "@/Components/BannerBienvenida";
 import CarruselEventos from "@/Components/CarruselEventos";
 import Suscribir from "@/Components/Suscribir";
 import Public from "@/Layouts/PublicLayout";
@@ -43,79 +45,6 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
         />
     );
 
-    const images = [
-        '/images/bannerdec/DECALOGO ANTE-PORTADA.png',
-        '/images/bannerdec/DECALOGO PORTADA.png',
-        '/images/bannerdec/DECALOGO PUNTO 1.png',
-        '/images/bannerdec/DECALOGO PUNTO 2.png',
-        '/images/bannerdec/DECALOGO PUNTO 3.png',
-    ];
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
-    const otrosData = [
-        {
-            id: '92',
-            imagen: "/images/bannerdec/DECALOGO ANTE-PORTADA.png",
-        },
-        {
-            id: '93',
-            imagen: "/images/bannerdec/DECALOGO PORTADA.png",
-        },
-        {
-            id: '1',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 1.png",
-        },
-        {
-            id: '2',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 2.png",
-        },
-        {
-            id: '3',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 3.png",
-        },
-        {
-            id: '4',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 4.png",
-        },
-        {
-            id: '5',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 5.png",
-        },
-        {
-            id: '6',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 6.png",
-        },
-        {
-            id: '7',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 7.png",
-        },
-        {
-            id: '8',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 8.png",
-        },
-        {
-            id: '9',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 9.png",
-        },
-        {
-            id: '91',
-            imagen: "/images/bannerdec/DECALOGO PUNTO 10.png",
-        },
-        {
-            id: '92',
-            imagen: "/images/bannerdec/DECALOGO PORTADA.png",
-        },
-    ];
-
     async function fetchTodo() {
         const [bannersResponse, eventosResponse] = await Promise.all([
             fetch("/banners"),
@@ -124,6 +53,8 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
 
         const banners = await bannersResponse.json();
         const eventos = await eventosResponse.json();
+
+        console.log(eventos.data);
 
         return [banners, eventos];
     }
@@ -529,8 +460,8 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
 
                     {/* {eventos} */}
                     <div className="flex mx-auto justify-center items-center my-10">
-                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative w-full">
+                        <div className="w-full flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-9/12">
                                 <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:border-b before:bg-[#9E214D]">
                                     Eventos
                                 </h1>
@@ -538,26 +469,10 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             {/* carrussel */}
                             {/* <CarruselEventos eventos={eventos.data}></CarruselEventos> */}
                             {/* Mapeo de imágenes */}
-                            {/* <div className="flex justify-center items-center gap-4">
-                                {eventos.data.map((evento, index) => (
-                                    <div
-                                        key={index}
-                                        className={`border border-gray-300 rounded-lg text-center py-5 px-3 flex items-center justify-center h-full transition-all duration-300 ${
-                                            index === 1 ? "scale-110 z-10" : "scale-90 opacity-70"
-                                        }`}
-                                    >
-                                        <div className="mb-3">
-                                            <img
-                                                src={evento.imagen}
-                                                alt={evento.alt}
-                                                className="w-full max-w-xs object-cover"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div> */}
                             
-                            <Carousel
+                            <BannerEventos eventos={(eventos?.data || [])}></BannerEventos>
+                            
+                            {/* <Carousel
                                 value={eventos.data || []}
                                 numVisible={1}
                                 numScroll={1}
@@ -565,27 +480,37 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                 circular
                                 showIndicators={false}
                                 autoplayInterval={10000}
-                            />
+                            /> */}
                         </div>
                     </div>
                     
                     {/* <Suscribir></Suscribir> */}
 
                     {/* {banners} */}
-                    <div className="flex mx-auto justify-center items-center">
-                        <div className="w-11/12 flex justify-center items-center text-black flex-col gap-6">
-                            <Carousel
-                                value={banners.data || []}
+                    <div className="flex mx-auto justify-center items-center my-10">
+                        <div className="w-full flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-9/12">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[8.5vh] before:border-b before:bg-[#9E214D]">
+                                    Extras
+                                </h1>
+                            </div>
+                            {/* carrussel */}
+                            {/* <CarruselEventos eventos={eventos.data}></CarruselEventos> */}
+                            {/* Mapeo de imágenes */}
+                            
+                            <BannerEventos eventos={(banners?.data || [])}></BannerEventos>
+                            
+                            {/* <Carousel
+                                value={eventos.data || []}
                                 numVisible={1}
                                 numScroll={1}
-                                itemTemplate={bannersTemplate}
+                                itemTemplate={eventosTemplate}
                                 circular
                                 showIndicators={false}
                                 autoplayInterval={10000}
-                            />
+                            /> */}
                         </div>
                     </div>
-                    
                     
 
                     {/* {otro} */}
@@ -604,44 +529,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     </div> */}
 
                     {/* BIENVENIDA */}
-                    <div className={`relative w-full ${isSmallScreen ? 'h-[40vw]' : 'h-[40vw] '} mt-8 mb-[5vh]`}>
-                        <div className="relative overflow-hidden rounded-lg h-auto min-h-full max-h-full w-9/12 mx-auto">
-                            {images.map((image, index) => (
-                                <div
-                                    key={index}
-                                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-                                >
-                                    <img src={image} className="w-full h-full object-cover rounded-lg border border-[#ECC6A1]" alt={`Slide ${index + 1}`} />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Botón para ir al slide anterior nuevo */}
-                        <button
-                            onClick={prevSlide}
-                            className="absolute top-1/2 left-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
-                        >
-                            <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded-full shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
-                                <svg className="w-[2vw] h-[2vw]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
-                                </svg>
-                                <span className="sr-only">Previous</span>
-                            </span>
-                        </button>
-
-                        {/* Botón para ir al slide siguiente */}
-                        <button
-                            onClick={nextSlide}
-                            className="absolute top-1/2 right-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
-                        >
-                            <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded-full shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
-                                <svg className="w-[2vw] h-[2vw]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                </svg>
-                                <span className="sr-only">Next</span>
-                            </span>
-                        </button>
-                    </div>
+                    <BannerBienvenida></BannerBienvenida>
 
                     {/* Ubicacion */}
                     <div className="flex mx-auto justify-center items-center mb-[5vh]">
@@ -678,6 +566,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         </div>
                     </div>
 
+                    {/* FOOTER */}
                     <Footer></Footer> 
                 </div>
             </div>

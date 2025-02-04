@@ -21,7 +21,7 @@ export default function Fotter(props) {
                     <div className={` ${isSmallScreen ? '' : 'grid grid-cols-2 md:grid-cols-2 gap-[1vw]'}`}>
                         <div className="flex justify-center">
                             <div className="flex">
-                                <img src="/images/logoc.png" className={`${isSmallScreen ? 'w-[13vw]' : 'w-[6vw]'}`} />
+                                <img src="/images/logoc.png" className={`${isSmallScreen ? 'w-[14vw]' : 'w-[7vw]'}`} />
                                 <img src="/images/logo2.png" className={`${isSmallScreen ? 'w-[13vw]' : 'w-[6vw]'}`} />
                             </div>
                             <div className="text-gray-800 mt-3">

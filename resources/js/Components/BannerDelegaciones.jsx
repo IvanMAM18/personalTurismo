@@ -6,14 +6,14 @@ import React, { useState, useEffect } from 'react';
 export default function BannerDelegaciones ({delegacion}){
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
     
-        useEffect(() => {
-            const handleResize = () => {
-            setIsSmallScreen(window.innerWidth <= 630);
-        };
+    useEffect(() => {
+        const handleResize = () => {
+        setIsSmallScreen(window.innerWidth <= 630);
+    };
     
-        window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }, []);
+    window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const [isOpen, setIsOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -58,14 +58,14 @@ export default function BannerDelegaciones ({delegacion}){
                         <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
                             Delegaciones
                         </h1>
-                        <div className="ml-auto">
+                        <div className={`ml-auto ${isSmallScreen ? 'hidden' : 'block'}`}>
                                 {/* Botones de navegación */}
                                 {!selectedImage ? (
                                     <>
                                     <button
                                         onClick={handlePrev}
                                         disabled={currentIndex === 0}
-                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] mr-[2vw] shadow text-gray-700 ${
+                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] mr-[2vw] shadow text-gray-200 ${
                                         currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
                                         }`}
                                     >
@@ -74,7 +74,7 @@ export default function BannerDelegaciones ({delegacion}){
                                     <button
                                         onClick={handleNext}
                                         disabled={currentIndex >= delegacion.length - 5}
-                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] shadow text-gray-700 ${
+                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] shadow text-gray-200 ${
                                         currentIndex >= delegacion.length - 5
                                             ? "opacity-50 cursor-not-allowed"
                                             : "hover:bg-gray-300"
@@ -97,7 +97,7 @@ export default function BannerDelegaciones ({delegacion}){
 
                     {/* Imagen seleccionada en grande */}
                     {selectedImage && (
-                        <div className="relative w-full h-[28vw] flex justify-center items-center transition-all duration-300 mt-[2vw]">
+                        <div className={`relative w-full h-[28vw] flex justify-center items-center transition-all duration-300 mt-[2vw] ${isSmallScreen ? 'hidden' : 'block'}`}>
                             <img
                                 src={selectedImage.cover_path}
                                 alt="Imagen seleccionada"
@@ -123,7 +123,7 @@ export default function BannerDelegaciones ({delegacion}){
 
                     {/* Mapeo de imágenes pequeñas */}
                         {!selectedImage && (
-                            <div className="top-0 right-0 w-full h-[28vw] flex flex-row items-center justify-center gap-2  mt-[2vw]">
+                            <div className={`top-0 right-0 w-full h-[28vw] flex flex-row items-center justify-center gap-2  mt-[2vw] ${isSmallScreen ? 'hidden' : 'block'}`}>
                                 {delegacion.slice(currentIndex, currentIndex + 5).map((item, index) => (
                                     <div
                                         key={item.slug}
@@ -150,8 +150,8 @@ export default function BannerDelegaciones ({delegacion}){
                             </div>
                         )}
 
-
-                    <InfiniteCarousel items={delegacion}></InfiniteCarousel> 
+                    <InfiniteCarousel items={delegacion} ></InfiniteCarousel>
+                    
                 </div>
             </div>
         </>

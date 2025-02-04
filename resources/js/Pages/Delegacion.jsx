@@ -71,7 +71,7 @@ export default function Delegacion({
                     </div>
 
                     {/* {secciones} */}
-                    <div className="flex mx-auto justify-center items-center my-1 bg-cover bg-center py-10">
+                    <div className="flex mx-auto justify-center items-center my-1 bg-cover bg-center mb-[10vh]">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="w-full bg-white flex text-center items-center flex-col md:flex-row">
                                 <div className="w-full md:grid flex flex-col lg:grid-rows-3 lg:grid-cols-3 lg:grid-flow-col lg:gap-4 gap-1 text-2xl font-extrabold">
@@ -180,15 +180,30 @@ export default function Delegacion({
                                             Hoteles
                                         </span>
                                     </Link>
-                                    <span
-                                        href="#"
+                                    <div
                                         className="col-span-1 p-28
-                                        bg-cover bg-center relative text-white"
+                                        bg-cover bg-center relative text-white hover:text-amber-600 group
+                                        scale-100 motion-safe:hover:scale-[1.01] transition-all duration-250 cursor-pointer"
                                         style={{
                                             backgroundImage:
                                                 "linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%)), url('/images/delegacion/7.webp')",
                                         }}
-                                    ></span>
+                                        onClick={() => {
+                                            // Crear un enlace temporal para descargar el archivo
+                                            const link = document.createElement("a");
+                                            link.href = "/images/CATALOGO DIGITAL.pdf"; // Ruta al archivo PDF
+                                            link.download = "CATALOGO DIGITAL.pdf"; // Nombre del archivo al descargar
+                                            link.click(); // Simula el clic para iniciar la descarga
+                                        }}
+                                    >
+                                        <span
+                                            className="absolute bottom-0 left-0 p-5 
+                                            before:absolute before:bottom-4 before:w-[70px] before:border-b-2
+                                            group-hover:before:border-b-amber-600"
+                                        >
+                                            Artesanos
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

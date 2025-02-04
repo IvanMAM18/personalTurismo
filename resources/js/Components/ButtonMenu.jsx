@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Head, Link } from "@inertiajs/react";
+
 
 export default function ButtonMenu  ({delegacion}){
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
@@ -22,7 +24,7 @@ export default function ButtonMenu  ({delegacion}){
     return (
         <>
             <div 
-                className={`border border-white opacity-95 rounded p-1 cursor-pointer text-white hover:opacity-80 hover:shadow-[#9B234C] hover:border-[#9B234C] hover:bg-[#9B234C] ${isOpen ? ' border-[#ECC6A1] text-white font-bold bg-[#ECC6A1]' : ''}`}
+                className={`border  opacity-95 rounded p-1 cursor-pointer  hover:opacity-80 hover:shadow-[#9B234C] hover:border-[#9B234C] hover:bg-[#9B234C] ${isOpen ? ' border-[#ECC6A1] text-gray-700 font-bold bg-[#ECC6A1]' : 'text-white border-white'}`}
                 onClick={toggleOptions}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -56,45 +58,29 @@ export default function ButtonMenu  ({delegacion}){
 
                 {/* Div de opciones  #9B234C*/}
                 <div 
-                    className={`absolute w-[93vw] opacity-95 mt-2 right-0 top-0 text-white  rounded-lg transition-transform duration-300 ${isOpen ? 'block' : 'hidden'}`}
+                    className={`absolute w-[93vw] mt-2 right-0 top-0 text-white  rounded-lg transition-transform duration-300 ${isOpen ? 'block' : 'hidden'}`}
                 >
-                    <div className='w-[40vh] p-2 rounded-lg ml-auto bg-[#ECC6A1]  border border-white'>
+                    <div className='w-[40vh] p-2 rounded-lg ml-auto bg-gray-100  border border-[#ECC6A1]'>
                             
-                        <div className="text-[3vh] text-center font-bold text-[#9B234C]">Delegeaciones</div>
-                        
-                        <ul className='mt-2 mx-2'>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold ">La Paz</span>
-                                <p className="text-[1.2vh] text-white ">Vive un paraíso entre el desierto y el mar</p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">Los Dolores, Puerto Chale</span>
-                                <p className="text-[1.2vh] text-white">Hogar de la Ballena Gris </p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">San Antonio, El Triunfo</span>
-                                <p className="text-[1.2vh] text-white">Joya Histórica de Baja California Sur </p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">El Sargento, La Ventana</span>
-                                <p className="text-[1.2vh] text-white">La Capital del Kite Surf </p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">El Carrizal, San Blas</span>
-                                <p className="text-[1.2vh] text-white">Tierra de cultivos y caminos infinitos </p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">Los Planes</span>
-                                <p className="text-[1.2vh] text-white">Playas, naturaleza y hermosos paisajes </p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">Todos Santos</span>
-                                <p className="text-[1.2vh] text-white">Pueblo Mágico</p>
-                            </li>
-                            <li className="p-2 border-radius text-[1.6vh] text-gray-600 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white">
-                                <span className="font-semibold">Los Barriles</span>
-                                <p className="text-[1.2vh] text-white">Capital de la pesca deportiva </p>
-                            </li>
+                        <div className="text-[3vh] text-center font-bold text-gray-700">Delegeaciones</div>
+
+                        <ul className="mt-2 mx-2">
+                            {delegacion.delegaciones.map((item, index) => {
+                                return (
+                                    <li
+                                        key={index}
+                                        className="p-2 border-radius text-[1.6vh] text-gray-700 hover:bg-[#9B234C] hover:opacity-90 hover:cursor-pointer hover:rounded-lg hover:pl-6 hover:text-[2vh] hover:text-white"
+                                    >
+                                        <Link
+                                            href={route("delegacion.show", item.slug)}
+                                            className="block"
+                                        >
+                                            <span className="font-semibold">{item.nombre}</span>
+                                            <p className="text-[1.2vh]">{item.leyenda}</p>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>

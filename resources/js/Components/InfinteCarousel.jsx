@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import { Head, Link } from "@inertiajs/react";
+import React, { useState, useEffect} from "react";
 
 const InfiniteCarousel = ({ items }) => {
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
+        
+    useEffect(() => {
+        const handleResize = () => {
+        setIsSmallScreen(window.innerWidth <= 630);
+    };
+        
+    window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const [currentIndex, setCurrentIndex] = useState(0); // Índice actual
     const [startX, setStartX] = useState(0); // Coordenada inicial del toque
 
@@ -24,7 +35,7 @@ const InfiniteCarousel = ({ items }) => {
     };
 
     return (
-        <div className="relative w-full h-[300px] overflow-hidden">
+        <div className={`relative w-full h-[50vh] overflow-hidden ${isSmallScreen ? 'block' : 'hidden'}`}>
             {/* Contenedor del carrusel */}
             <div
                 className="relative flex items-center justify-center h-full"
@@ -33,13 +44,15 @@ const InfiniteCarousel = ({ items }) => {
             >
                 {items.map((item, index) => {
                     // Calcular la posición relativa de cada imagen
-                    const position =
-                        (index - currentIndex + items.length) % items.length;
-
+                    const position = (index - currentIndex + items.length) % items.length;
                     return (
-                        <div
+                        <Link 
                             key={index}
-                            className={`absolute w-[80%] h-[200px] transition-transform duration-500 ease-in-out`}
+                            href={route(
+                                "delegacion.show",
+                                item.slug
+                            )}
+                            className={`absolute w-full h-[40vh] transition-transform duration-500 ease-in-out`}
                             style={{
                                 transform: `translateX(${
                                     position * 20
@@ -53,19 +66,22 @@ const InfiniteCarousel = ({ items }) => {
                                 alt={item.title}
                                 className="w-full h-full object-cover rounded-lg shadow-lg"
                             />
-                        </div>
+                            <div className="absolute inset-0 rounded-lg flex items-center justify-center  transition-opacity duration-300">
+                                <p className="text-white text-[7vw] font-bold text-center">{item.nombre || `Imagen ${index + 1}`}</p>
+                            </div>
+                        </Link>
                     );
                 })}
             </div>
 
             {/* Indicadores */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 ">
+            <div className="absolute bottom-[1vh] left-1/2 transform -translate-x-1/2 flex space-x-2 ">
                 {items.map((_, index) => (
                     <div
                         key={index}
                         className={`w-3 h-3 rounded-full ${
                             index === currentIndex
-                                ? "bg-blue-500"
+                                ? "bg-[#9E214D]"
                                 : "bg-gray-300"
                         }`}
                     ></div>
