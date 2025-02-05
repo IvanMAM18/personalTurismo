@@ -5,6 +5,7 @@ import Footer from "@/Components/Footer";
 import ButtonMenu from "@/Components/ButtonMenu";
 import BannerEventos from "@/Components/BannerEventos";
 import BannerDelegaciones from "@/Components/BannerDelegaciones";
+import BannerDelegacionesTwo from "@/Components/BannerDelegacionesTwo";
 import BannerBienvenida from "@/Components/BannerBienvenida";
 import CarruselEventos from "@/Components/CarruselEventos";
 import Suscribir from "@/Components/Suscribir";
@@ -391,9 +392,44 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                         </div>
                     </div>
 
+                    {/* Ubicacion */}
+                    <div className="flex mx-auto justify-center items-center my-[5vh]">
+                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-full">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:border-b before:bg-[#9E214D]">
+                                    Ubicación
+                                </h1>
+                            </div>
+                            <div
+                                style={{
+                                    height: "35vh",
+                                    width: "100%",
+                                }}
+                            >
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{
+                                        key: "AIzaSyDDsXWAnmhPpTP9St_pt27H16RD771s7dI",
+                                    }}
+                                    defaultCenter={{
+                                        lat: 24.1481589,
+                                        lng: -110.3181937,
+                                    }}
+                                    defaultZoom={13}
+                                    options={createMapOptions}
+                                >
+                                    <Marker
+                                        lat={pos.lat}
+                                        lng={pos.lng}
+                                        text="La Paz"
+                                    />
+                                </GoogleMapReact>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* {Destinos} */}
-                    <BannerDelegaciones delegacion={delegaciones}></BannerDelegaciones>
+                    {/* <BannerDelegaciones delegacion={delegaciones}></BannerDelegaciones> */}
+                    <BannerDelegacionesTwo delegacion={delegaciones} />
                      {/* <div className="flex mx-auto justify-center items-center my-4">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full flex">
@@ -531,40 +567,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     {/* BIENVENIDA */}
                     <BannerBienvenida></BannerBienvenida>
 
-                    {/* Ubicacion */}
-                    <div className="flex mx-auto justify-center items-center mb-[5vh]">
-                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative w-full">
-                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:border-b before:bg-[#9E214D]">
-                                    Ubicación
-                                </h1>
-                            </div>
-                            <div
-                                style={{
-                                    height: "35vh",
-                                    width: "100%",
-                                }}
-                            >
-                                <GoogleMapReact
-                                    bootstrapURLKeys={{
-                                        key: "AIzaSyDDsXWAnmhPpTP9St_pt27H16RD771s7dI",
-                                    }}
-                                    defaultCenter={{
-                                        lat: 24.1481589,
-                                        lng: -110.3181937,
-                                    }}
-                                    defaultZoom={13}
-                                    options={createMapOptions}
-                                >
-                                    <Marker
-                                        lat={pos.lat}
-                                        lng={pos.lng}
-                                        text="La Paz"
-                                    />
-                                </GoogleMapReact>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     {/* FOOTER */}
                     <Footer></Footer> 

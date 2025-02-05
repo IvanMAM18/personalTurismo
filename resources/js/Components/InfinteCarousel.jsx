@@ -66,8 +66,10 @@ const InfiniteCarousel = ({ items }) => {
                                 alt={item.title}
                                 className="w-full h-full object-cover rounded-lg shadow-lg"
                             />
-                            <div className="absolute inset-0 rounded-lg flex items-center justify-center  transition-opacity duration-300">
-                                <p className="text-white text-[7vw] font-bold text-center">{item.nombre || `Imagen ${index + 1}`}</p>
+                            {/* Contenedor de textos */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
+                                <p className="text-[6vw] font-bold">{item.nombre || `Imagen ${index + 1}`}</p>
+                                <p className="text-[2vh] mt-2">{item.leyenda || "Sin descripción"}</p>
                             </div>
                         </Link>
                     );

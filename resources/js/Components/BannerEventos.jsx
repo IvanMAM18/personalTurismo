@@ -104,7 +104,7 @@ export default function BannerEventos({ eventos }) {
             {/* Modal para mostrar la imagen en pantalla completa */}
             {isModalOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 hover:bg-gray-700"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 "
                     onClick={closeModal} // Cierra el modal al hacer clic fuera de la imagen
                 >
                     <img
