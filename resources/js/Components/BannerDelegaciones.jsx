@@ -58,97 +58,43 @@ export default function BannerDelegaciones ({delegacion}){
                         <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
                             Delegaciones
                         </h1>
-                        <div className={`ml-auto ${isSmallScreen ? 'hidden' : 'block'}`}>
-                                {/* Botones de navegación */}
-                                {!selectedImage ? (
-                                    <>
-                                    <button
-                                        onClick={handlePrev}
-                                        disabled={currentIndex === 0}
-                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] mr-[2vw] shadow text-gray-200 ${
-                                        currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
-                                        }`}
-                                    >
-                                        ◀
-                                    </button>
-                                    <button
-                                        onClick={handleNext}
-                                        disabled={currentIndex >= delegacion.length - 5}
-                                        className={`bg-gray-500 w-[4.8vh] h-[4.8vh] shadow text-gray-200 ${
-                                        currentIndex >= delegacion.length - 5
-                                            ? "opacity-50 cursor-not-allowed"
-                                            : "hover:bg-gray-300"
-                                        }`}
-                                    >
-                                        ▶
-                                    </button>
-                                    </>
-                                ) : (
-                                    // Botón para cerrar
-                                    <button
-                                    onClick={handleClose}
-                                    className="bg-[#9E214D] opacity-70 text-white w-[4.8vh] h-[4.8vh] shadow hover:opacity-100 transition-all duration-300"
-                                    >
-                                    X
-                                    </button>
-                                )}
-                        </div>
+                        
                     </div>
+                    <div
+                        className={`mt-[4vh] grid grid-cols-2 md:grid-cols-3 gap-4 ${
+                            isSmallScreen ? "hidden" : "block"
+                        }`}
+                    >
+                        {delegacion.map((item, index) => {
+                            return (
+                                <Link
+                                    href={route("delegacion.show", item.slug)}
+                                    key={index}
+                                    className="relative w-full h-[18vw] transition-transform duration-500 ease-in-out group"
+                                >
+                                    {/* Imagen */}
+                                    <img
+                                        src={item.cover_path}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover rounded-lg shadow-lg transition duration-300 group-hover:brightness-50"
+                                    />
 
-                    {/* Imagen seleccionada en grande */}
-                    {selectedImage && (
-                        <div className={`relative w-full h-[28vw] flex justify-center items-center transition-all duration-300 mt-[2vw] ${isSmallScreen ? 'hidden' : 'block'}`}>
-                            <img
-                                src={selectedImage.cover_path}
-                                alt="Imagen seleccionada"
-                                className="w-[38vw] h-full object-coverrounded mr-auto rounded"
-                            />
-                                {/* Texto encima de la imagen */}
-                            <div className="w-[38vw] h-full ml-4 flex flex-col justify-center items-center bg-black rounded bg-opacity-50 gap-4">
-                                <h2 className="text-white text-[2.2vw] font-bold">{selectedImage.nombre}</h2>
-                                <h1 className="text-white text-[1.8vw]">{selectedImage.leyenda}</h1>
-                                <Link href={route(
-                                            "delegacion.show",
-                                            selectedImage.slug
-                                        )}>
-                                    <button 
-                                        
-                                        className="p-[0.6vw] text-[0.9vw] bg-white rounded opacity-70 hover:opacity-100">
-                                        CONOCER MÁS
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Mapeo de imágenes pequeñas */}
-                        {!selectedImage && (
-                            <div className={`top-0 right-0 w-full h-[28vw] flex flex-row items-center justify-center gap-2  mt-[2vw] ${isSmallScreen ? 'hidden' : 'block'}`}>
-                                {delegacion.slice(currentIndex, currentIndex + 5).map((item, index) => (
-                                    <div
-                                        key={item.slug}
-                                        //href={route("delegacion.show", item.slug)}
-                                        className="relative w-[14.7vw] h-full rounded overflow-hidden shadow shadow-[#ECC6A1] group transition-all duration-300 cursor-pointer"
-                                        onClick={(e) => {
-                                            e.preventDefault(); // Evita la navegación al hacer clic
-                                            handleImageClick(item); // Cambia la imagen principal
-                                        }}
-                                    >
-                                        {/* Imagen */}
-                                        <img
-                                            src={item.cover_path}
-                                            alt={`Imagen ${index + 1}`}
-                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 opacity-100"
-                                        />
-
-                                        {/* Texto encima de la imagen */}
-                                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-                                            <p className="text-white text-[1.4vw] font-bold text-center">{item.nombre || `Imagen ${index + 1}`}</p>
-                                        </div>
+                                    {/* Contenedor de textos */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
+                                        {/* Nombre */}
+                                        <p className="text-[2.2vw] font-bold">{item.nombre || `Imagen ${index + 1}`}</p>
+                                        {/* Leyenda */}
+                                        <p className="text-[1.2vw] mt-2">{item.leyenda || "Sin descripción"}</p>
                                     </div>
-                                ))}
-                            </div>
-                        )}
+
+                                    {/* Div adicional que aparece al hover */}
+                                    <div className="absolute inset-x-0 bottom-0 flex items-center justify-center bg-white text-gray-700 text-center py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-lg">
+                                        <p className="text-[1vw]">Conocer más</p>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
 
                     <InfiniteCarousel items={delegacion} ></InfiniteCarousel>
                     

@@ -5,11 +5,7 @@ import Footer from "@/Components/Footer";
 import ButtonMenu from "@/Components/ButtonMenu";
 import BannerEventos from "@/Components/BannerEventos";
 import BannerDelegaciones from "@/Components/BannerDelegaciones";
-import BannerDelegacionesTwo from "@/Components/BannerDelegacionesTwo";
 import BannerBienvenida from "@/Components/BannerBienvenida";
-import CarruselEventos from "@/Components/CarruselEventos";
-import Suscribir from "@/Components/Suscribir";
-import Public from "@/Layouts/PublicLayout";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Carousel } from "primereact/carousel";
@@ -88,51 +84,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
     const toggleDescripcion = () => {
         setIsActive(!isActive);
     };
-    const bannersTemplate = (banner) => {
-        return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 w-full flex items-center justify-center">
-                <div className="mb-3">
-                    <Image
-                        src={banner.imagen}
-                        alt={banner.alt}
-                        className="w-full xl:max-w-7xl"
-                        preview
-                    />
-                </div>
-            </div>
-        );
-    };
 
-    const bannersTemplate2 = (banner) => {
-        return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 w-full flex items-center justify-center">
-                <div className="mb-3">
-                    <Image
-                        src={banner.imagen}
-                        alt={banner.alt}
-                        className="w-full xl:max-w-7xl"
-                        preview
-                    />
-                </div>
-            </div>
-        );
-    };
-
-    const eventosTemplate = (evento) => {
-        return (
-            <div 
-            className="border-1 surface-border border-round m-2 text-center py-5 px-3 flex items-center justify-center align-middle ">
-                <div className="mb-3">
-                    <Image
-                        src={evento.imagen}
-                        alt={evento.alt}
-                        className="w-full max-w-xs"
-                        preview
-                    />
-                </div>
-            </div>
-        );
-    };
     const createMapOptions = (maps) => {
         // next props are exposed at maps
         // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
@@ -428,55 +380,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     </div>
 
                     {/* {Destinos} */}
-                    {/* <BannerDelegaciones delegacion={delegaciones}></BannerDelegaciones> */}
-                    <BannerDelegacionesTwo delegacion={delegaciones} />
-                     {/* <div className="flex mx-auto justify-center items-center my-4">
-                        <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
-                            <div className="relative w-full flex">
-                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
-                                    Delegaciones
-                                </h1>
-                            </div>
-                            <div className="grid grid-cols-1 xl:grid-cols-4 4xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-2 gap-6 lg:gap-8 my-5">
-                                {delegaciones.map((item) => (
-                                    <Link
-                                        key={item.slug} // Agrega una key única aquí
-                                        href={route(
-                                            "delegacion.show",
-                                            item.slug
-                                        )}
-                                        className="scale-100 bg-white rounded-lg shadow-[10px_10px_10px_5px_rgba(0,0,0,0.25)] flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-amber-700"
-                                    >
-                                        <div className="flex w-full flex-col ">
-                                            <div className=" shadow shadow-[#ECC6A1] rounded-lg">
-                                                <img
-                                                    src={item.cover_path}
-                                                    className="w-full rounded-t-lg h-[200px]"
-                                                />
-                                            </div>
-                                            <div className="p-2 rounded-b-lg">
-                                                <h2 className="text-xl font-semibold text-gray-800">
-                                                    {item.nombre}
-                                                </h2>
-                                                <h3 className="text-gray-800 text-sm">
-                                                    {item.leyenda}
-                                                </h3>
-                                                <div className="my-5">
-                                                    <span
-                                                        role="button"
-                                                        className="rounded-full py-2 px-4 sm:px-1 sm:py-1 border-2 border-gray-500 font-bold text-gray-700 text-xs"
-                                                    >
-                                                        CONOCER MÁS{" "}
-                                                        <ChevronRight className="inline" size={13}></ChevronRight>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </div>  */}
+                    <BannerDelegaciones delegacion={delegaciones} />
 
                     {/* <div className="flex mx-auto justify-center items-center my-20">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
@@ -503,20 +407,9 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                 </h1>
                             </div>
                             {/* carrussel */}
-                            {/* <CarruselEventos eventos={eventos.data}></CarruselEventos> */}
-                            {/* Mapeo de imágenes */}
                             
                             <BannerEventos eventos={(eventos?.data || [])}></BannerEventos>
                             
-                            {/* <Carousel
-                                value={eventos.data || []}
-                                numVisible={1}
-                                numScroll={1}
-                                itemTemplate={eventosTemplate}
-                                circular
-                                showIndicators={false}
-                                autoplayInterval={10000}
-                            /> */}
                         </div>
                     </div>
                     
@@ -531,20 +424,9 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                                 </h1>
                             </div>
                             {/* carrussel */}
-                            {/* <CarruselEventos eventos={eventos.data}></CarruselEventos> */}
-                            {/* Mapeo de imágenes */}
                             
                             <BannerEventos eventos={(banners?.data || [])}></BannerEventos>
                             
-                            {/* <Carousel
-                                value={eventos.data || []}
-                                numVisible={1}
-                                numScroll={1}
-                                itemTemplate={eventosTemplate}
-                                circular
-                                showIndicators={false}
-                                autoplayInterval={10000}
-                            /> */}
                         </div>
                     </div>
                     
