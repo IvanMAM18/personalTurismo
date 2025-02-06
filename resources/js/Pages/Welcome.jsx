@@ -319,7 +319,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     </div>
 
                     {/* {vision} */}
-                    <div className="flex mx-auto justify-center items-center my-1">
+                    <div className="flex mx-auto justify-center items-center my-[3vh]">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full">
                                 <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[16.5vh] before:border-b before:bg-[#9E214D]">
@@ -345,7 +345,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     </div>
 
                     {/* Ubicacion */}
-                    <div className="flex mx-auto justify-center items-center my-[5vh]">
+                    <div className="flex mx-auto justify-center items-center my-[3vh]">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full">
                                 <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:border-b before:bg-[#9E214D]">
@@ -399,7 +399,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     
 
                     {/* {eventos} */}
-                    <div className="flex mx-auto justify-center items-center my-10">
+                    <div className="flex mx-auto justify-center items-center">
                         <div className="w-full flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-9/12">
                                 <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:border-b before:bg-[#9E214D]">
@@ -408,7 +408,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             </div>
                             {/* carrussel */}
                             
-                            <BannerEventos eventos={(eventos?.data || [])}></BannerEventos>
+                            <BannerEventos eventos={(eventos?.data || [])} tiempo={5000}></BannerEventos>
                             
                         </div>
                     </div>
@@ -416,7 +416,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     {/* <Suscribir></Suscribir> */}
 
                     {/* {banners} */}
-                    <div className="flex mx-auto justify-center items-center my-10">
+                    <div className="flex mx-auto justify-center items-center">
                         <div className="w-full flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-9/12">
                                 <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[8.5vh] before:border-b before:bg-[#9E214D]">
@@ -425,7 +425,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                             </div>
                             {/* carrussel */}
                             
-                            <BannerEventos eventos={(banners?.data || [])}></BannerEventos>
+                            <BannerEventos eventos={(banners?.data || [])} tiempo={10000}></BannerEventos>
                             
                         </div>
                     </div>

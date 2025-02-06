@@ -1,19 +1,31 @@
 import { Head, Link } from "@inertiajs/react";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 const InfiniteCarousel = ({ items }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
-        
-    useEffect(() => {
-        const handleResize = () => {
-        setIsSmallScreen(window.innerWidth <= 630);
-    };
-        
-    window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
     const [currentIndex, setCurrentIndex] = useState(0); // Índice actual
     const [startX, setStartX] = useState(0); // Coordenada inicial del toque
+
+    // Detectar cambios en el tamaño de la pantalla
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth <= 630);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Cambio automático de imágenes cada 8 segundos
+    useEffect(() => {
+        if (items.length > 0) {
+            const interval = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+            }, 8000); // Cambia cada 8 segundos
+
+            return () => clearInterval(interval); // Limpia el intervalo al desmontar
+        }
+    }, [items]);
 
     const handleTouchStart = (e) => {
         setStartX(e.touches[0].clientX); // Guarda la posición inicial del toque
@@ -35,7 +47,7 @@ const InfiniteCarousel = ({ items }) => {
     };
 
     return (
-        <div className={`relative w-full h-[50vh] overflow-hidden ${isSmallScreen ? 'block' : 'hidden'}`}>
+        <div className={`relative w-full h-[45vh] overflow-hidden ${isSmallScreen ? "block" : "hidden"}`}>
             {/* Contenedor del carrusel */}
             <div
                 className="relative flex items-center justify-center h-full"
@@ -46,17 +58,12 @@ const InfiniteCarousel = ({ items }) => {
                     // Calcular la posición relativa de cada imagen
                     const position = (index - currentIndex + items.length) % items.length;
                     return (
-                        <Link 
+                        <Link
                             key={index}
-                            href={route(
-                                "delegacion.show",
-                                item.slug
-                            )}
-                            className={`absolute w-full h-[40vh] transition-transform duration-500 ease-in-out`}
+                            href={route("delegacion.show", item.slug)}
+                            className={`absolute w-full h-[35vh] transition-transform duration-500 ease-in-out`}
                             style={{
-                                transform: `translateX(${
-                                    position * 20
-                                }%) scale(${position === 0 ? 1 : 0.8})`,
+                                transform: `translateX(${position * 20}%) scale(${position === 0 ? 1 : 0.8})`,
                                 zIndex: position === 0 ? 10 : 5,
                                 opacity: position === 0 ? 1 : 0.5,
                             }}
@@ -64,7 +71,7 @@ const InfiniteCarousel = ({ items }) => {
                             <img
                                 src={item.cover_path}
                                 alt={item.title}
-                                className="w-full h-full object-cover rounded-lg shadow-lg"
+                                className="w-full h-full object-cover rounded-lg shadow-lg mt-[-2vh]"
                             />
                             {/* Contenedor de textos */}
                             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
@@ -77,14 +84,12 @@ const InfiniteCarousel = ({ items }) => {
             </div>
 
             {/* Indicadores */}
-            <div className="absolute bottom-[1vh] left-1/2 transform -translate-x-1/2 flex space-x-2 ">
+            <div className="absolute bottom-[3vh] left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {items.map((_, index) => (
                     <div
                         key={index}
                         className={`w-3 h-3 rounded-full ${
-                            index === currentIndex
-                                ? "bg-[#9E214D]"
-                                : "bg-gray-300"
+                            index === currentIndex ? "bg-[#9E214D]" : "bg-gray-300"
                         }`}
                     ></div>
                 ))}

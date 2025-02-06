@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function BannerEventos({ eventos }) {
+export default function BannerEventos({ eventos, tiempo }) {
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 780);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
@@ -13,6 +13,17 @@ export default function BannerEventos({ eventos }) {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    // Movimiento automático del carrusel cada 10 segundos
+    useEffect(() => {
+        if (eventos && eventos.length > 0) {
+            const interval = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % eventos.length);
+            }, tiempo); // Cambia cada segundo
+
+            return () => clearInterval(interval); // Limpia el intervalo al desmontar
+        }
+    }, [eventos]);
 
     const nextSlide = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % eventos.length);
@@ -38,7 +49,7 @@ export default function BannerEventos({ eventos }) {
                     {(eventos || []).map((evento, index) => (
                         <div
                             key={index}
-                            className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex justify-center items-center hover:bg-gray-700 ${
+                            className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex justify-center items-center ${
                                 index === currentIndex ? "opacity-100" : "opacity-0"
                             }`}
                         >
@@ -53,52 +64,56 @@ export default function BannerEventos({ eventos }) {
                 </div>
 
                 {/* Botón para ir al slide anterior */}
-                <button
-                    onClick={prevSlide}
-                    className="absolute top-1/2 left-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
-                >
-                    <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
-                        <svg
-                            className="w-[2vw] h-[2vw]"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 6 10"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M5 1 1 5l4 4"
-                            />
-                        </svg>
-                        <span className="sr-only">Previous</span>
-                    </span>
-                </button>
+                {eventos && eventos.length > 1 && (
+                    <button
+                        onClick={prevSlide}
+                        className="absolute top-1/2 left-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
+                    >
+                        <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
+                            <svg
+                                className="w-[2vw] h-[2vw]"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 6 10"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M5 1 1 5l4 4"
+                                />
+                            </svg>
+                            <span className="sr-only">Previous</span>
+                        </span>
+                    </button>
+                )}
 
                 {/* Botón para ir al slide siguiente */}
-                <button
-                    onClick={nextSlide}
-                    className="absolute top-1/2 right-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
-                >
-                    <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
-                        <svg
-                            className="w-[2vw] h-[2vw]"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 6 10"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="m1 9 4-4-4-4"
-                            />
-                        </svg>
-                        <span className="sr-only">Next</span>
-                    </span>
-                </button>
+                {eventos && eventos.length > 1 && (
+                    <button
+                        onClick={nextSlide}
+                        className="absolute top-1/2 right-0 z-30 transform -translate-y-1/2 mx-[3vw] bg-white"
+                    >
+                        <span className="inline-flex items-center justify-center w-[5vw] h-[5vw] rounded shadow shadow-[#ECC6A1] hover:bg-[#9E214D] hover:text-white">
+                            <svg
+                                className="w-[2vw] h-[2vw]"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 6 10"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="m1 9 4-4-4-4"
+                                />
+                            </svg>
+                            <span className="sr-only">Next</span>
+                        </span>
+                    </button>
+                )}
             </div>
 
             {/* Modal para mostrar la imagen en pantalla completa */}

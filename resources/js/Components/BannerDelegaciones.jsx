@@ -51,7 +51,7 @@ export default function BannerDelegaciones ({delegacion}){
 
     return (
         <>
-            <div className="flex mx-auto justify-center items-center my-[3vw]">
+            <div className="flex mx-auto justify-center items-center my-[3vh]">
                 <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                     {/* Título */}
                     <div className="relative w-full flex">

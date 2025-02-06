@@ -22,7 +22,7 @@ export default function Fotter(props) {
                         <div className="flex justify-center">
                             <div className="flex">
                                 <img src="/images/logoc.png" className={`${isSmallScreen ? 'w-[14vw]' : 'w-[7vw]'}`} />
-                                <img src="/images/logo2.png" className={`${isSmallScreen ? 'w-[13vw]' : 'w-[6vw]'}`} />
+                                <img src="/images/logo2.png" className={`${isSmallScreen ? 'w-[13vw]' : 'w-[7vw]'}`} />
                             </div>
                             <div className="text-gray-800 mt-3">
                                 <div className={` font-bold leading-[1vw] border-l-[0.2vw] border-l-[#9B234C] pl-[0.4vw] ${isSmallScreen?'text-[2.6vw]':'text-[1.2vw] ml-[1vw]'}`}>
