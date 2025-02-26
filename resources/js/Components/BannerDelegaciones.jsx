@@ -55,7 +55,7 @@ export default function BannerDelegaciones ({delegacion}){
                 <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                     {/* Título */}
                     <div className="relative w-full flex">
-                        <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:border-b before:bg-[#9E214D]">
+                        <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[18.5vh] before:bg-[#9E214D]">
                             Delegaciones
                         </h1>
                         

@@ -61,8 +61,8 @@ export default function BannerBienvenida() {
     return (
         <>
             {/* BIENVENIDA */}
-            <div className={`relative w-full ${isSmallScreen ? 'h-[40vw]' : 'h-[40vw] '} mb-[6vh]`}>
-                <div className="relative overflow-hidden rounded-lg h-auto min-h-full max-h-full w-9/12 mx-auto">
+            <div className={`relative w-full ${isSmallScreen ? 'h-[40vw] mt-[1vw] mb-[6vw]' : 'h-[40vw] mt-[3vw] mb-[4vw]'}  `}>
+                <div className="relative overflow-hidden rounded shadow shadow-[#ECC6A1] h-auto min-h-full max-h-full w-9/12 mx-auto">
                     {images.map((image, index) => (
                         <div
                             key={index}
@@ -72,7 +72,7 @@ export default function BannerBienvenida() {
                         >
                             <img
                                 src={image}
-                                className="w-full h-full object-cover rounded-lg border border-[#ECC6A1] cursor-pointer"
+                                className="w-full h-full object-cover rounded cursor-pointer"
                                 alt={`Slide ${index + 1}`}
                                 onClick={openModal} // Abre el modal al hacer clic
                             />

@@ -6,6 +6,7 @@ import ButtonMenu from "@/Components/ButtonMenu";
 import BannerEventos from "@/Components/BannerEventos";
 import BannerDelegaciones from "@/Components/BannerDelegaciones";
 import BannerBienvenida from "@/Components/BannerBienvenida";
+import BannerTwo from "@/Components/BannerTwo";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Carousel } from "primereact/carousel";
@@ -322,7 +323,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     <div className="flex mx-auto justify-center items-center my-[3vh]">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full">
-                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[16.5vh] before:border-b before:bg-[#9E214D]">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[16.5vh] before:bg-[#9E214D]">
                                     Visión 2040
                                 </h1>
                             </div>
@@ -348,7 +349,7 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     <div className="flex mx-auto justify-center items-center my-[3vh]">
                         <div className="w-9/12 flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-full">
-                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:border-b before:bg-[#9E214D]">
+                                <h1 className="text-[3vh] font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[14vh] before:bg-[#9E214D]">
                                     Ubicación
                                 </h1>
                             </div>
@@ -399,16 +400,43 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     
 
                     {/* {eventos} */}
+                    {/* <div className="flex mx-auto justify-center items-center">
+                        <div className="w-full flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-9/12">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:bg-[#9E214D]">
+                                    Eventos
+                                </h1>
+                            </div>
+                            
+                            <BannerEventos eventos={(eventos?.data || [])} tiempo={5000}></BannerEventos>
+                            
+                        </div>
+                    </div> */}
                     <div className="flex mx-auto justify-center items-center">
                         <div className="w-full flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-9/12">
-                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:border-b before:bg-[#9E214D]">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[11vh] before:bg-[#9E214D]">
                                     Eventos
                                 </h1>
                             </div>
                             {/* carrussel */}
                             
-                            <BannerEventos eventos={(eventos?.data || [])} tiempo={5000}></BannerEventos>
+                            <BannerTwo eventos={(eventos?.data || [])} tiempo={5000}></BannerTwo>
+                            
+                        </div>
+                    </div>
+
+                    {/* {banners} */}
+                    <div className="flex mx-auto justify-center items-center">
+                        <div className="w-full flex justify-center items-center text-black flex-col gap-6">
+                            <div className="relative w-9/12">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[8.5vh] before:bg-[#9E214D]">
+                                    Extras
+                                </h1>
+                            </div>
+                            {/* carrussel */}
+                            
+                            <BannerTwo eventos={(banners?.data || [])} tiempo={10000}></BannerTwo>
                             
                         </div>
                     </div>
@@ -416,19 +444,18 @@ export default function Welcome({ delegaciones, temperatura, fecha, hora }) {
                     {/* <Suscribir></Suscribir> */}
 
                     {/* {banners} */}
-                    <div className="flex mx-auto justify-center items-center">
+                    {/* <div className="flex mx-auto justify-center items-center">
                         <div className="w-full flex justify-center items-center text-black flex-col gap-6">
                             <div className="relative w-9/12">
-                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[8.5vh] before:border-b before:bg-[#9E214D]">
+                                <h1 className="text-[3vh] text-center font-bold before:absolute before:-bottom-[0.5vh] before:h-[.5vh] before:w-[8.5vh] before:bg-[#9E214D]">
                                     Extras
                                 </h1>
                             </div>
-                            {/* carrussel */}
                             
                             <BannerEventos eventos={(banners?.data || [])} tiempo={10000}></BannerEventos>
                             
                         </div>
-                    </div>
+                    </div> */}
                     
 
                     {/* {otro} */}

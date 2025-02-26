@@ -24,7 +24,7 @@ export default function ButtonMenu  ({delegacion}){
     return (
         <>
             <div 
-                className={`border  opacity-95 rounded p-1 cursor-pointer  hover:opacity-80 hover:shadow-[#9B234C] hover:border-[#9B234C] hover:bg-[#9B234C] ${isOpen ? ' border-[#ECC6A1] text-gray-700 font-bold bg-[#ECC6A1]' : 'text-white border-white'}`}
+                className={`border  opacity-95 rounded p-1 cursor-pointer  hover:opacity-80 hover:shadow-[#9B234C] hover:border-[#ECC6A1] hover:bg-white hover:text-gray-700 ${isOpen ? ' border-[#ECC6A1] text-gray-700 font-bold bg-white' : 'text-white border-white'}`}
                 onClick={toggleOptions}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
